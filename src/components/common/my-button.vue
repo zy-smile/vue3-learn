@@ -4,7 +4,7 @@
       <el-icon v-if="preIcon">
         <component :is="preIcon"></component>
       </el-icon>
-      <slot>默认内容</slot>
+      <slot>默认按钮</slot>
     </button>
   </div>
   <div></div>
