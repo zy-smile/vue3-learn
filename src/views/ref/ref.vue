@@ -1,60 +1,48 @@
 <template>
-  <el-page-header content="响应式数据" @back="goBack" title="返回"/>
-    <el-button type="primary" @click="clickhandle">点击+1</el-button>
-    <h2>{{count}}</h2>
-    <h2>对象1: {{data.count}}</h2>
-    <h2>对象2: {{obj.count}}</h2>
-    <h2>数组： {{arr[0].count}}</h2>
+    <h3>Ref</h3>
+    <el-row>
+      <span>数字：</span><span>{{count}}</span>
+    </el-row>
+  <el-row>
+    <span>count是否是ref:</span><span>{{flag}}</span>
+  </el-row>
+
+  <el-button type="primary" @click="addHandle">自增+1</el-button>
+
+  <el-row>
+    <span>state:</span> <span>{{state.count}}</span>
+    <el-button @click="addStateHandle">自增++</el-button>
+  </el-row>
 </template>
 
-<script>
-import {ref,reactive,unref} from 'vue'
-export default {
-    name: 'ref',
-    setup() {
-        const count = ref(1)
-        const data = ref({
-            count: 1
-        })
-        const obj = reactive({
-            count: 1
-        })
-        const arr = ref([{
-            count: 1
-        },{
-            count: 2
-        }])
-        const dataarr = reactive([
-            {count: 1},
-            {count: 2}
-        ])
-        
-        // console.log(data); 
-        // console.log(data.count);//undefined
-        // console.log(obj);
-        // console.log(obj.count); 1
-        console.log(arr);
-        console.log(dataarr);
-        function clickhandle() {
-            count.value ++
-            data.value.count++
-            obj.count++
-            arr.value[0].count = 2
-            console.log(unref(arr));
-        }
-        return {
-            count,
-            data,
-            obj,
-            arr,
-            clickhandle
-        }
-    }
-}
-</script>
+<script setup>
+import {isRef, ref, shallowRef, unref} from "vue";
 
+//ref
+const count = ref(1)
+function addHandle() {
+  count.value++
+}
+//isRef
+const flag = isRef(count)
+
+//unref --- isRef语法糖
+const uncount = unref(count)
+console.log(uncount)
+
+const state = shallowRef({count: 1})
+function addStateHandle() {
+  // state.value.count++ 不是响应性
+  state.value = { count: 2}
+}
+
+
+
+</script>
 <style>
-.el-page-header {
-    margin-bottom: 30px;
+.el-row {
+  display: flex;
+  align-items: center;
+  margin: 20px;
 }
 </style>

@@ -1,9 +1,10 @@
 <template>
-  <div class="leftbar">
-      <left-bar></left-bar>
-  </div>
+ 
   <div class="container">
       <Header/>
+       <div class="leftbar">
+            <left-bar></left-bar>
+        </div>
       <div class="content">
           <router-view></router-view>
       </div>
@@ -16,19 +17,22 @@ import LeftBar from '../components/leftbar.vue'
 </script>
 
 <style scoped>
-.leftbar {
-    position: absolute;
-    left: 0;
-    top: 0;
-    bottom: 0;
-    margin: auto;
-    width: 200px;
-}
-.container {
-    margin-left: 200px;
-    height: 100%;
-}
-.content {
-    padding: 20px;
-}
+    .leftbar {
+        position: absolute;
+        left: 0;
+        top: 60px;
+        bottom: 0;
+        width: 200px;
+    }
+    .container {
+        height: 100%;
+    }
+    .content {
+        position: absolute;
+        left: 200px;
+        top: 60px;
+        bottom: 0;
+        right: 0;
+        margin: auto;
+    }
 </style>

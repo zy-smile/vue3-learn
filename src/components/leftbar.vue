@@ -3,39 +3,32 @@
     :default-active="activeIndex"
     class="el-menu-demo"
     :router="true"
-    background-color="#333"
+    background-color="#343434"
     text-color="#fff"
     active-text-color="#ffd04b"
     :unique-opened="true"
     @select="handleSelect"
   >
-     <el-sub-menu index="1">
+     <el-sub-menu :index="item.id" v-for="item in menuList" :key="item.id">
           <template #title>
-                <span>组合api</span>
+                <span>{{item.title}}</span>
             </template>
-          <el-menu-item index="/ref">响应式注册</el-menu-item>
-            <el-menu-item index="1-2">watch监听</el-menu-item>
-            <el-menu-item index="1-3">计算属性</el-menu-item>
-     </el-sub-menu>
-      <el-sub-menu index="2">
-          <template #title>
-                <span>首页</span>
-            </template>
-          <el-menu-item index="2-1">首页1</el-menu-item>
-            <el-menu-item index="2-2">2</el-menu-item>
-            <el-menu-item index="2-3">3</el-menu-item>
+            <el-menu-item :index="option.path" v-for="option in item.children" :key="option.id">{{option.title}}</el-menu-item>
      </el-sub-menu>
   </el-menu>
 </template>
 
-<script>
-export default {
+<script setup>
+import { menuList } from './sideBarData'
+console.log(menuList)
+const activeIndex = '/ref'
 
-}
+
 </script>
 
-<style scoped>
+<style scoped lang="less">
     .el-menu {
         height: 100%;
+        background-color: #343434;
     }
 </style>
